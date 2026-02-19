@@ -1,18 +1,21 @@
 
 import React, { useState, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Monitor, ChevronDown, ExternalLink, FolderOpen } from 'lucide-react';
+import { Monitor, ChevronDown, ExternalLink, FolderOpen, AlertTriangle } from 'lucide-react';
 import { ShinyText } from '../components/Animations';
 import Terminal from '../components/Terminal';
 import AnimatedContent from '../components/AnimatedContent';
+import ElectricBorder from '../components/ElectricBorder';
 
 const IDESetupPlayer = lazy(() => import('../components/remotion/IDESetupPlayer'));
 const FolderSetupPlayer = lazy(() => import('../components/remotion/FolderSetupPlayer'));
+const EnvSetupPlayer = lazy(() => import('../components/remotion/EnvSetupPlayer'));
 
 const StepIDE: React.FC = () => {
   const [os, setOs] = useState<'mac' | 'windows'>('mac');
   const [showVideo, setShowVideo] = useState(false);
   const [showFolderVideo, setShowFolderVideo] = useState(false);
+  const [showEnvVideo, setShowEnvVideo] = useState(false);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 pt-20 pb-40 text-center">
@@ -140,18 +143,20 @@ const StepIDE: React.FC = () => {
           transition={{ delay: 0.3 }}
           className="max-w-2xl mx-auto mb-10"
         >
+          <ElectricBorder>
           <button
             onClick={() => setShowVideo(!showVideo)}
-            className="flex items-center gap-2 mx-auto text-zinc-400 hover:text-white text-xs uppercase tracking-widest transition-colors"
+            className="flex items-center gap-2 mx-auto px-5 py-2.5 rounded-full text-zinc-400 hover:text-white text-sm uppercase tracking-widest transition-colors"
           >
             <motion.div
               animate={{ rotate: showVideo ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ChevronDown size={14} />
+              <ChevronDown size={16} />
             </motion.div>
             <ShinyText text="Watch: Setting up Cursor" speed={2.5} delay={0.7} />
           </button>
+          </ElectricBorder>
           <AnimatePresence>
             {showVideo && (
               <motion.div
@@ -223,18 +228,20 @@ const StepIDE: React.FC = () => {
           transition={{ delay: 0.3 }}
           className="max-w-2xl mx-auto mb-10"
         >
+          <ElectricBorder>
           <button
             onClick={() => setShowFolderVideo(!showFolderVideo)}
-            className="flex items-center gap-2 mx-auto text-zinc-400 hover:text-white text-xs uppercase tracking-widest transition-colors"
+            className="flex items-center gap-2 mx-auto px-5 py-2.5 rounded-full text-zinc-400 hover:text-white text-sm uppercase tracking-widest transition-colors"
           >
             <motion.div
               animate={{ rotate: showFolderVideo ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ChevronDown size={14} />
+              <ChevronDown size={16} />
             </motion.div>
             <ShinyText text="Watch: Creating & opening your project" speed={2.5} delay={0.7} />
           </button>
+          </ElectricBorder>
           <AnimatePresence>
             {showFolderVideo && (
               <motion.div
@@ -259,6 +266,106 @@ const StepIDE: React.FC = () => {
             )}
           </AnimatePresence>
         </motion.div>
+
+        {/* Step 5: Environment Files */}
+        <AnimatedContent><div className="bg-black/30 backdrop-blur-sm border border-zinc-800 rounded-2xl p-6 max-w-2xl mx-auto mb-8 text-left">
+          <p className="text-white text-xs font-bold uppercase tracking-widest mb-3">
+            Step 5: Understand Environment Files
+          </p>
+          <p className="text-zinc-400 text-sm leading-relaxed mb-4">
+            <span className="text-white">Claude Code doesn't need this</span> — it authenticates when you run <code className="text-green-400 text-xs bg-zinc-900 px-1.5 py-0.5 rounded">claude</code> for the first time. But almost every real project you build will use <span className="text-white">API keys</span> from other services (Stripe for payments, Google Maps, weather APIs, etc.). This is how you store them safely.
+          </p>
+          <p className="text-zinc-400 text-sm leading-relaxed mb-4">
+            A <code className="text-green-400 text-xs bg-zinc-900 px-1.5 py-0.5 rounded">.env</code> file is like a <span className="text-white">private notebook</span> that stores secrets your project needs — passwords, API keys, database addresses. It lives in your project folder but <span className="text-white">never gets shared publicly</span>. Think of it like the combination to a safe — the safe is part of your project, but the combination stays with you.
+          </p>
+          <p className="text-zinc-400 text-sm leading-relaxed mb-4">
+            When your project needs a secret, it reads from this file instead of having the secret written directly in your code. This way, you can share your code with the world without accidentally sharing your passwords.
+          </p>
+          <Terminal
+            title="Example .env file"
+            commands={[
+              { text: '# API keys for services your project uses', isComment: true },
+              { text: 'STRIPE_API_KEY=your_stripe_key_here' },
+              { text: 'DATABASE_URL=postgres://user:password@localhost:5432/mydb' },
+              { text: 'WEATHER_API_KEY=abc123def456ghi789' },
+              { text: '' },
+              { text: '# Claude Code does NOT need a key here —', isComment: true },
+              { text: '# it authenticates automatically via "claude" command', isComment: true },
+            ]}
+          />
+        </div></AnimatedContent>
+
+        {/* How to create a .env file */}
+        <AnimatedContent><div className="bg-black/30 backdrop-blur-sm border border-zinc-800 rounded-2xl p-6 max-w-2xl mx-auto mb-8 text-left">
+          <p className="text-white text-xs font-bold uppercase tracking-widest mb-3">
+            Creating a .env File
+          </p>
+          <p className="text-zinc-400 text-sm leading-relaxed mb-4">
+            When a project needs API keys, just ask Claude to set it up for you. Claude will create the file and show you where to paste your keys.
+          </p>
+          <Terminal
+            title="Claude Code"
+            commands={[
+              { text: 'Create a .env file for this project with placeholders for the API keys we need.' },
+              { text: '✓ Created .env with placeholders', isOutput: true },
+              { text: '✓ Added .env to .gitignore (keeps it private)', isOutput: true },
+            ]}
+          />
+        </div></AnimatedContent>
+
+        {/* Env Visual Guide */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="max-w-2xl mx-auto mb-10"
+        >
+          <ElectricBorder>
+          <button
+            onClick={() => setShowEnvVideo(!showEnvVideo)}
+            className="flex items-center gap-2 mx-auto px-5 py-2.5 rounded-full text-zinc-400 hover:text-white text-sm uppercase tracking-widest transition-colors"
+          >
+            <motion.div
+              animate={{ rotate: showEnvVideo ? 180 : 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <ChevronDown size={16} />
+            </motion.div>
+            <ShinyText text="Watch: How .env files work" speed={2.5} delay={0.7} />
+          </button>
+          </ElectricBorder>
+          <AnimatePresence>
+            {showEnvVideo && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                className="overflow-hidden"
+              >
+                <div className="mt-4">
+                  <Suspense
+                    fallback={
+                      <div className="w-full aspect-video bg-black/40 rounded-xl border border-zinc-800 flex items-center justify-center">
+                        <div className="text-zinc-600 text-sm">Loading animation...</div>
+                      </div>
+                    }
+                  >
+                    <EnvSetupPlayer />
+                  </Suspense>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Security Warning */}
+        <AnimatedContent><div className="bg-zinc-900/30 border border-yellow-900/20 rounded-2xl p-5 text-left max-w-xl mx-auto mb-8 flex items-start gap-3">
+          <AlertTriangle size={18} className="text-yellow-400/80 flex-shrink-0 mt-0.5" />
+          <p className="text-zinc-300 text-sm leading-relaxed">
+            <span className="text-white">Never share API keys</span> or paste them in public forums. Treat them like passwords. If you accidentally expose one, regenerate it immediately from the service's dashboard.
+          </p>
+        </div></AnimatedContent>
 
         {/* Pro Tip */}
         <AnimatedContent><div className="bg-zinc-900/10 border border-zinc-800 rounded-2xl p-5 text-left max-w-xl mx-auto mb-8">

@@ -19,7 +19,16 @@ import Step5 from './pages/Step5';
 import Step6 from './pages/Step6';
 import Step7 from './pages/Step7';
 import Step8 from './pages/Step8';
+import StepHowToRun from './pages/StepHowToRun';
 import StepRefinement from './pages/StepRefinement';
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -35,10 +44,11 @@ const AnimatedRoutes = () => {
         <Route path="/step-5-architect" element={<Step3 />} />
         <Route path="/step-6-initialize" element={<Step4 />} />
         <Route path="/step-7-build" element={<Step5 />} />
-        <Route path="/step-8-git" element={<Step6 />} />
-        <Route path="/step-9-deploy" element={<Step7 />} />
-        <Route path="/step-10-mastery" element={<Step8 />} />
-        <Route path="/step-11-refinement" element={<StepRefinement />} />
+        <Route path="/step-8-run" element={<StepHowToRun />} />
+        <Route path="/step-9-git" element={<Step6 />} />
+        <Route path="/step-10-deploy" element={<Step7 />} />
+        <Route path="/step-11-mastery" element={<Step8 />} />
+        <Route path="/step-12-refinement" element={<StepRefinement />} />
       </Routes>
     </AnimatePresence>
   );
@@ -47,6 +57,7 @@ const AnimatedRoutes = () => {
 const App: React.FC = () => {
   return (
     <Router>
+      <ScrollToTop />
       <div className="relative min-h-screen w-full bg-[#050505] text-white selection:bg-white selection:text-black">
         {/* Galaxy background */}
         <div className="fixed inset-0 z-0">

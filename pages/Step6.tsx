@@ -1,14 +1,16 @@
 
 import React, { useState, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GitBranch, ChevronDown } from 'lucide-react';
+import { GitBranch, ChevronDown, ShieldCheck } from 'lucide-react';
 import { ShinyText } from '../components/Animations';
 import Terminal from '../components/Terminal';
 import AnimatedContent from '../components/AnimatedContent';
+import ElectricBorder from '../components/ElectricBorder';
 
 const GitVsGitHubPlayer = lazy(() => import('../components/remotion/GitVsGitHubPlayer'));
 const BranchMergePlayer = lazy(() => import('../components/remotion/BranchMergePlayer'));
 const BranchWorkflowPlayer = lazy(() => import('../components/remotion/BranchWorkflowPlayer'));
+const GitignorePlayer = lazy(() => import('../components/remotion/GitignorePlayer'));
 
 const VideoFallback = () => (
   <div className="w-full aspect-video bg-black/40 rounded-xl border border-zinc-800 flex items-center justify-center">
@@ -20,6 +22,7 @@ const Step6: React.FC = () => {
   const [showGitGuide, setShowGitGuide] = useState(false);
   const [showBranchGuide, setShowBranchGuide] = useState(false);
   const [showWorkflowGuide, setShowWorkflowGuide] = useState(false);
+  const [showGitignoreGuide, setShowGitignoreGuide] = useState(false);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-6 pt-20 pb-40 text-center">
@@ -75,18 +78,20 @@ const Step6: React.FC = () => {
           transition={{ delay: 0.3 }}
           className="max-w-2xl mx-auto mb-12"
         >
+          <ElectricBorder>
           <button
             onClick={() => setShowGitGuide(!showGitGuide)}
-            className="flex items-center gap-2 mx-auto text-zinc-400 hover:text-white text-xs uppercase tracking-widest transition-colors"
+            className="flex items-center gap-2 mx-auto px-5 py-2.5 rounded-full text-zinc-400 hover:text-white text-sm uppercase tracking-widest transition-colors"
           >
             <motion.div
               animate={{ rotate: showGitGuide ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ChevronDown size={14} />
+              <ChevronDown size={16} />
             </motion.div>
             <ShinyText text="See how Git and GitHub work together" speed={2.5} delay={0.7} />
           </button>
+          </ElectricBorder>
           <AnimatePresence>
             {showGitGuide && (
               <motion.div
@@ -144,18 +149,20 @@ const Step6: React.FC = () => {
           transition={{ delay: 0.5 }}
           className="max-w-2xl mx-auto mb-12"
         >
+          <ElectricBorder>
           <button
             onClick={() => setShowBranchGuide(!showBranchGuide)}
-            className="flex items-center gap-2 mx-auto text-zinc-400 hover:text-white text-xs uppercase tracking-widest transition-colors"
+            className="flex items-center gap-2 mx-auto px-5 py-2.5 rounded-full text-zinc-400 hover:text-white text-sm uppercase tracking-widest transition-colors"
           >
             <motion.div
               animate={{ rotate: showBranchGuide ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ChevronDown size={14} />
+              <ChevronDown size={16} />
             </motion.div>
             <ShinyText text="Watch branching and merging in action" speed={2.5} delay={1.2} />
           </button>
+          </ElectricBorder>
           <AnimatePresence>
             {showBranchGuide && (
               <motion.div
@@ -249,18 +256,20 @@ const Step6: React.FC = () => {
           transition={{ delay: 0.8 }}
           className="max-w-2xl mx-auto mb-8"
         >
+          <ElectricBorder>
           <button
             onClick={() => setShowWorkflowGuide(!showWorkflowGuide)}
-            className="flex items-center gap-2 mx-auto text-zinc-400 hover:text-white text-xs uppercase tracking-widest transition-colors"
+            className="flex items-center gap-2 mx-auto px-5 py-2.5 rounded-full text-zinc-400 hover:text-white text-sm uppercase tracking-widest transition-colors"
           >
             <motion.div
               animate={{ rotate: showWorkflowGuide ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ChevronDown size={14} />
+              <ChevronDown size={16} />
             </motion.div>
             <ShinyText text="Watch the full branching workflow" speed={2.5} delay={1.5} />
           </button>
+          </ElectricBorder>
           <AnimatePresence>
             {showWorkflowGuide && (
               <motion.div
@@ -316,6 +325,101 @@ const Step6: React.FC = () => {
             { text: '✓ Pushed to github.com/you/my-website', isOutput: true },
           ]}
         />
+
+        {/* ── SECTION 5: .gitignore ── */}
+        <div className="mt-12 mb-6 flex justify-center">
+          <ShieldCheck className="text-white opacity-40" size={32} strokeWidth={1.5} />
+        </div>
+        <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-6">Protect your secrets</p>
+
+        <AnimatedContent>
+          <div className="bg-zinc-900/30 border border-zinc-800 rounded-2xl p-6 max-w-2xl mx-auto mb-6 text-left">
+            <p className="text-white text-xs font-bold uppercase tracking-widest mb-3">What is .gitignore?</p>
+            <p className="text-zinc-300 text-sm leading-relaxed mb-3">
+              A <code className="text-green-400 text-xs bg-zinc-900 px-1.5 py-0.5 rounded">.gitignore</code> file is a <span className="text-white">list of files Git should pretend don't exist</span>. Anything listed in it won't get saved to GitHub — perfect for keeping secrets like API keys private.
+            </p>
+            <p className="text-zinc-300 text-sm leading-relaxed">
+              Think of it like a bouncer at a club. When you push your code to GitHub, the bouncer checks the list. If a file is on the <span className="text-white">.gitignore list</span>, it doesn't get in. Your <code className="text-green-400 text-xs bg-zinc-900 px-1.5 py-0.5 rounded">.env</code> file (which holds your secret API keys) should <span className="text-white">always</span> be on this list.
+            </p>
+          </div>
+        </AnimatedContent>
+
+        <AnimatedContent delay={0.1}>
+          <div className="bg-zinc-900/30 border border-zinc-800 rounded-2xl p-6 max-w-2xl mx-auto mb-6 text-left">
+            <p className="text-white text-xs font-bold uppercase tracking-widest mb-3">Why this matters</p>
+            <p className="text-zinc-300 text-sm leading-relaxed mb-3">
+              If you push your <code className="text-green-400 text-xs bg-zinc-900 px-1.5 py-0.5 rounded">.env</code> file to GitHub, <span className="text-white">anyone can see your API keys</span>. Bots actively scan GitHub for exposed keys. Within minutes, your key could be stolen and used to rack up charges on your account.
+            </p>
+            <p className="text-zinc-300 text-sm leading-relaxed">
+              The <code className="text-green-400 text-xs bg-zinc-900 px-1.5 py-0.5 rounded">.gitignore</code> file prevents this entirely. Set it up once and never worry about it again.
+            </p>
+          </div>
+        </AnimatedContent>
+
+        <AnimatedContent delay={0.15}>
+          <Terminal
+            title="Ask Claude to Create .gitignore"
+            commands={[
+              { text: 'Create a .gitignore file for this project. Make sure .env and node_modules are ignored.' },
+              { text: '✓ Created .gitignore', isOutput: true },
+              { text: '' },
+              { text: '# What Claude creates:', isComment: true },
+              { text: '# .env', isComment: true },
+              { text: '# .env.local', isComment: true },
+              { text: '# node_modules/', isComment: true },
+              { text: '# .DS_Store', isComment: true },
+            ]}
+          />
+        </AnimatedContent>
+
+        {/* Gitignore Visual Guide */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="max-w-2xl mx-auto mb-10 mt-8"
+        >
+          <ElectricBorder>
+          <button
+            onClick={() => setShowGitignoreGuide(!showGitignoreGuide)}
+            className="flex items-center gap-2 mx-auto px-5 py-2.5 rounded-full text-zinc-400 hover:text-white text-sm uppercase tracking-widest transition-colors"
+          >
+            <motion.div
+              animate={{ rotate: showGitignoreGuide ? 180 : 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <ChevronDown size={16} />
+            </motion.div>
+            <ShinyText text="Watch: How .gitignore protects your secrets" speed={2.5} delay={0.7} />
+          </button>
+          </ElectricBorder>
+          <AnimatePresence>
+            {showGitignoreGuide && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                className="overflow-hidden"
+              >
+                <div className="mt-4">
+                  <Suspense fallback={<VideoFallback />}>
+                    <GitignorePlayer />
+                  </Suspense>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+
+        <AnimatedContent delay={0.2}>
+          <div className="bg-zinc-900/10 border border-zinc-800 rounded-2xl p-5 text-left max-w-xl mx-auto mb-8">
+            <p className="text-green-400 text-xs font-bold uppercase tracking-widest mb-2">Pro Tip</p>
+            <p className="text-zinc-300 text-sm leading-relaxed">
+              Always create your <code className="text-green-400 text-xs bg-zinc-900 px-1.5 py-0.5 rounded">.gitignore</code> file <span className="text-white">before</span> your first push to GitHub. If you push secrets first and add .gitignore later, the secrets are already in your history. Ask Claude: <span className="text-white">"Create a .gitignore before we push anything."</span>
+            </p>
+          </div>
+        </AnimatedContent>
 
         {/* Conflict tip */}
         <motion.div

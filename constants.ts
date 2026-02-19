@@ -61,27 +61,34 @@ export const STEPS: Step[] = [
   {
     id: 8,
     path: MissionPath.STEP8,
+    title: "How to Run Your Site",
+    description: "Create a reusable run command so you never have to remember technical steps again.",
+    command: "Refer to how_to_run.md to run this"
+  },
+  {
+    id: 9,
+    path: MissionPath.STEP9,
     title: "Version Control",
     description: "Save your progress like video game checkpoints. Push to the cloud with natural language.",
     command: "Set up a new Git repo here and add all files."
   },
   {
-    id: 9,
-    path: MissionPath.STEP9,
+    id: 10,
+    path: MissionPath.STEP10,
     title: "Deploy to the World",
     description: "Go from localhost to a live URL in one command. Deploy with Vercel.",
     command: "vercel --prod"
   },
   {
-    id: 10,
-    path: MissionPath.STEP10,
+    id: 11,
+    path: MissionPath.STEP11,
     title: "Mastery & Troubleshooting",
     description: "Handle errors, understand costs, and level up your semantic development skills.",
     command: "/compact"
   },
   {
-    id: 11,
-    path: MissionPath.STEP11,
+    id: 12,
+    path: MissionPath.STEP12,
     title: "The Art of Refinement",
     description: "Master the design layers, find the wow factor, and embrace continuous iteration.",
     command: "Compare my site to the reference. What's still different?"

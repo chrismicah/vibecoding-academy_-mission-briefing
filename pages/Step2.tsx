@@ -5,6 +5,7 @@ import { Download, ChevronDown, RotateCcw, Clipboard, CornerDownLeft, ExternalLi
 import { ShinyText } from '../components/Animations';
 import Terminal, { CopyButton } from '../components/Terminal';
 import AnimatedContent from '../components/AnimatedContent';
+import ElectricBorder from '../components/ElectricBorder';
 
 // Lazy-load the Remotion player so it doesn't block initial render
 const TerminalGuidePlayer = lazy(() => import('../components/remotion/TerminalGuidePlayer'));
@@ -386,18 +387,20 @@ const Step2: React.FC = () => {
           transition={{ delay: 0.3 }}
           className="max-w-2xl mx-auto mb-8"
         >
+          <ElectricBorder>
           <button
             onClick={() => setShowTerminalHelp(!showTerminalHelp)}
-            className="flex items-center gap-2 mx-auto text-zinc-400 hover:text-white text-xs uppercase tracking-widest transition-colors"
+            className="flex items-center gap-2 mx-auto px-5 py-2.5 rounded-full text-zinc-400 hover:text-white text-sm uppercase tracking-widest transition-colors"
           >
             <motion.div
               animate={{ rotate: showTerminalHelp ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ChevronDown size={14} />
+              <ChevronDown size={16} />
             </motion.div>
             <ShinyText text="How do I open a terminal?" speed={2.5} delay={0.7} />
           </button>
+          </ElectricBorder>
           <AnimatePresence>
             {showTerminalHelp && (
               <motion.div

@@ -6,6 +6,7 @@ import { ShinyText } from '../components/Animations';
 import Terminal from '../components/Terminal';
 import AnimatedContent from '../components/AnimatedContent';
 import TiltedCard from '../components/TiltedCard';
+import ElectricBorder from '../components/ElectricBorder';
 
 const CursorTerminalPlayer = lazy(() => import('../components/remotion/CursorTerminalPlayer'));
 
@@ -101,18 +102,20 @@ const Step4: React.FC = () => {
           transition={{ delay: 0.4 }}
           className="max-w-2xl mx-auto mb-10"
         >
+          <ElectricBorder>
           <button
             onClick={() => setShowTerminalVideo(!showTerminalVideo)}
-            className="flex items-center gap-2 mx-auto text-zinc-400 hover:text-white text-xs uppercase tracking-widest transition-colors"
+            className="flex items-center gap-2 mx-auto px-5 py-2.5 rounded-full text-zinc-400 hover:text-white text-sm uppercase tracking-widest transition-colors"
           >
             <motion.div
               animate={{ rotate: showTerminalVideo ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ChevronDown size={14} />
+              <ChevronDown size={16} />
             </motion.div>
             <ShinyText text="Watch: Terminal inside vs. outside Cursor" speed={2.5} delay={0.7} />
           </button>
+          </ElectricBorder>
           <AnimatePresence>
             {showTerminalVideo && (
               <motion.div

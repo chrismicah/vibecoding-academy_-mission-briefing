@@ -7,6 +7,7 @@ import Terminal from '../components/Terminal';
 import AnimatedContent from '../components/AnimatedContent';
 import TiltedCard from '../components/TiltedCard';
 import Magnet from '../components/Magnet';
+import ElectricBorder from '../components/ElectricBorder';
 
 const SpecDocPlayer = lazy(() => import('../components/remotion/SpecDocPlayer'));
 
@@ -71,18 +72,20 @@ const Step3: React.FC = () => {
           viewport={{ once: true }}
           className="max-w-2xl mx-auto mb-10"
         >
+          <ElectricBorder>
           <button
             onClick={() => setShowVideo(!showVideo)}
-            className="flex items-center gap-2 mx-auto text-zinc-400 hover:text-white text-xs uppercase tracking-widest transition-colors"
+            className="flex items-center gap-2 mx-auto px-5 py-2.5 rounded-full text-zinc-400 hover:text-white text-sm uppercase tracking-widest transition-colors"
           >
             <motion.div
               animate={{ rotate: showVideo ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ChevronDown size={14} />
+              <ChevronDown size={16} />
             </motion.div>
             <ShinyText text="Watch: Screenshots to spec doc" speed={2.5} delay={0.7} />
           </button>
+          </ElectricBorder>
           <AnimatePresence>
             {showVideo && (
               <motion.div

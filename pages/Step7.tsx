@@ -5,6 +5,7 @@ import { Rocket, ChevronDown } from 'lucide-react';
 import { ShinyText } from '../components/Animations';
 import Terminal, { CopyButton } from '../components/Terminal';
 import AnimatedContent from '../components/AnimatedContent';
+import ElectricBorder from '../components/ElectricBorder';
 
 const DeployFlowPlayer = lazy(() => import('../components/remotion/DeployFlowPlayer'));
 
@@ -43,18 +44,20 @@ const Step7: React.FC = () => {
           transition={{ delay: 0.1 }}
           className="max-w-2xl mx-auto mb-6"
         >
+          <ElectricBorder>
           <button
             onClick={() => setShowWhatIsVercel(!showWhatIsVercel)}
-            className="flex items-center gap-2 mx-auto text-zinc-400 hover:text-white text-xs uppercase tracking-widest transition-colors"
+            className="flex items-center gap-2 mx-auto px-5 py-2.5 rounded-full text-zinc-400 hover:text-white text-sm uppercase tracking-widest transition-colors"
           >
             <motion.div
               animate={{ rotate: showWhatIsVercel ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ChevronDown size={14} />
+              <ChevronDown size={16} />
             </motion.div>
             <ShinyText text="What is Vercel?" speed={2.5} delay={0.3} />
           </button>
+          </ElectricBorder>
           <AnimatePresence>
             {showWhatIsVercel && (
               <motion.div
@@ -104,18 +107,20 @@ const Step7: React.FC = () => {
           transition={{ delay: 0.12 }}
           className="max-w-2xl mx-auto mb-8"
         >
+          <ElectricBorder>
           <button
             onClick={() => setShowWhyMain(!showWhyMain)}
-            className="flex items-center gap-2 mx-auto text-zinc-400 hover:text-white text-xs uppercase tracking-widest transition-colors"
+            className="flex items-center gap-2 mx-auto px-5 py-2.5 rounded-full text-zinc-400 hover:text-white text-sm uppercase tracking-widest transition-colors"
           >
             <motion.div
               animate={{ rotate: showWhyMain ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ChevronDown size={14} />
+              <ChevronDown size={16} />
             </motion.div>
             <ShinyText text="Why do you only push to Main to deploy?" speed={2.5} delay={0.5} />
           </button>
+          </ElectricBorder>
           <AnimatePresence>
             {showWhyMain && (
               <motion.div
@@ -161,18 +166,20 @@ const Step7: React.FC = () => {
           transition={{ delay: 0.15 }}
           className="max-w-2xl mx-auto mb-10"
         >
+          <ElectricBorder>
           <button
             onClick={() => setShowDeployGuide(!showDeployGuide)}
-            className="flex items-center gap-2 mx-auto text-zinc-400 hover:text-white text-xs uppercase tracking-widest transition-colors"
+            className="flex items-center gap-2 mx-auto px-5 py-2.5 rounded-full text-zinc-400 hover:text-white text-sm uppercase tracking-widest transition-colors"
           >
             <motion.div
               animate={{ rotate: showDeployGuide ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ChevronDown size={14} />
+              <ChevronDown size={16} />
             </motion.div>
             <ShinyText text="How does deployment work?" speed={2.5} delay={0.7} />
           </button>
+          </ElectricBorder>
           <AnimatePresence>
             {showDeployGuide && (
               <motion.div
@@ -236,18 +243,20 @@ const Step7: React.FC = () => {
           transition={{ delay: 0.45 }}
           className="max-w-2xl mx-auto mb-10"
         >
+          <ElectricBorder>
           <button
             onClick={() => setShowDetailedSetup(!showDetailedSetup)}
-            className="flex items-center gap-2 mx-auto text-zinc-400 hover:text-white text-xs uppercase tracking-widest transition-colors"
+            className="flex items-center gap-2 mx-auto px-5 py-2.5 rounded-full text-zinc-400 hover:text-white text-sm uppercase tracking-widest transition-colors"
           >
             <motion.div
               animate={{ rotate: showDetailedSetup ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ChevronDown size={14} />
+              <ChevronDown size={16} />
             </motion.div>
             <ShinyText text="See the full setup walkthrough" speed={2.5} delay={0.9} />
           </button>
+          </ElectricBorder>
           <AnimatePresence>
             {showDetailedSetup && (
               <motion.div
@@ -379,18 +388,20 @@ const Step7: React.FC = () => {
           transition={{ delay: 0.65 }}
           className="max-w-2xl mx-auto mb-10"
         >
+          <ElectricBorder>
           <button
             onClick={() => setShowEnvVars(!showEnvVars)}
-            className="flex items-center gap-2 mx-auto text-zinc-400 hover:text-white text-xs uppercase tracking-widest transition-colors"
+            className="flex items-center gap-2 mx-auto px-5 py-2.5 rounded-full text-zinc-400 hover:text-white text-sm uppercase tracking-widest transition-colors"
           >
             <motion.div
               animate={{ rotate: showEnvVars ? 180 : 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ChevronDown size={14} />
+              <ChevronDown size={16} />
             </motion.div>
             <ShinyText text="Managing environment variables (API keys)" speed={2.5} delay={1.1} />
           </button>
+          </ElectricBorder>
           <AnimatePresence>
             {showEnvVars && (
               <motion.div

@@ -16,8 +16,9 @@ export enum MissionPath {
   STEP5 = '/step-5-architect',
   STEP6 = '/step-6-initialize',
   STEP7 = '/step-7-build',
-  STEP8 = '/step-8-git',
-  STEP9 = '/step-9-deploy',
-  STEP10 = '/step-10-mastery',
-  STEP11 = '/step-11-refinement'
+  STEP8 = '/step-8-run',
+  STEP9 = '/step-9-git',
+  STEP10 = '/step-10-deploy',
+  STEP11 = '/step-11-mastery',
+  STEP12 = '/step-12-refinement'
 }
